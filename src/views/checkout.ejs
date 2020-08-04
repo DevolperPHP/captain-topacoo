@@ -1,0 +1,54 @@
+<% include _layouts/header %>
+
+<% if (typeof cart !== "undefined") { %>
+
+<h1 class="page-title">عربة التسوق</h1>
+<br><br>
+
+<table class="table table-striped alignmiddle">
+    
+    <tr>
+        <th>صورة المنتج</th>
+        <th>اسم المنتج</th>
+        <th>سعر المنتج</th>
+        <th>العدد</th>
+        <th></th>
+        <th>السعر النهائي</th>
+    </tr>
+    
+    <% var total = 0; %>
+    <% cart.forEach(function(product){ %>
+    <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+    <% total += +sub %>
+    <tr>
+        <td><img class="cpi" src="<%= product.image %>" alt=""></td>
+        <td><%= product.title %></td>
+        <td>$<%= product.price %></td>
+        <td><%= product.qty %></td>
+        <td>
+            <a href="/cart/update/<%= product.title %>?action=add">+</a>&nbsp;
+            <a href="/cart/update/<%= product.title %>?action=remove">-</a>&nbsp;
+            <a href="/cart/update/<%= product.title %>?action=clear">حذف</a>&nbsp;
+        </td>
+        <td>$<%= sub %></td>
+    </tr>
+    <% }); %>
+    <tr>
+        <td colspan="6" align="right"><b>المبلغ الكلي: </b> $<%= parseFloat(total).toFixed(2) %></td>
+    </tr>
+    <tr>
+        <td colspan="5" align="right">
+            <a class="clearcart btn btn-danger" href="/cart/clear">حذف المنتجات من عربة التسوق</a>
+        </td>
+        <td colspan="5" align="right">
+            <a class="btn btn-primary buynow" onclick="window.location.href='https://t.me/zeusCr'">الشراء الان</a>
+        </td>
+    </tr>
+    
+</table>
+
+<% } else {%>
+<h3 class="text-center">سلة التسوق فارغة</h3>
+<% } %>
+
+<% include _layouts/footer %>

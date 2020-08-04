@@ -1,0 +1,15 @@
+<% include _layouts/header %>
+
+<body>
+  <script>
+    Swal.fire( 'هل عمرك +18؟', 'هذا المتجر موجه للناس ذوي عر 18 فما فوق', 'question' ).then((res) =>{
+       if(res.value){
+      window.location.href='./products';
+       }
+    });
+
+  </script>
+  
+</body>
+
+<% include _layouts/footer %>
